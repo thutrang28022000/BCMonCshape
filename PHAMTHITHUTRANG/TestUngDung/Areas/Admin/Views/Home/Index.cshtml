@@ -1,0 +1,26 @@
+﻿@using TestUngDung.Areas.Admin.Models;
+@using ModelEF;
+@{
+    ViewBag.Title = "Trang chủ ";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section  Header{
+    TRANG CHỦ
+}
+<div class="form-group">
+    <div class="panel-body  daily-sales-info span.sales-label">
+        Xin chào
+        @{
+            var session = (LoginModel)Session[Constants.USER_SESSION];
+            var result = "NoName";
+            if (session != null)
+            { @session.UserName;
+        }
+        else
+        { @result;
+    }
+        }  !
+    </div>
+</div>
+

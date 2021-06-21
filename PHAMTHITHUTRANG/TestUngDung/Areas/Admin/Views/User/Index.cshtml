@@ -1,0 +1,65 @@
+﻿@using PagedList.Mvc
+@using PagedList
+@model IEnumerable<ModelEF.Model.UserAccount>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section Header{
+    <i class="fa fa-user"></i>&nbsp; Quản lý trang người dùng
+}
+
+@using (Html.BeginForm("Index", "User", FormMethod.Post))
+{
+    <div class="form-group col-lg-12">
+        <div class=" col-md-3 ">
+            @Html.ActionLink("Tạo mới tài khoản ", "Create", "Product", new { @class = "btn btn-danger" })
+        </div>
+        <div class=" col-md-6">
+            <input type="text" value="@ViewBag.SearchString" name="searchString" placeholder="Nhập từ khóa cần tìm kiếm..." class="form-control" />
+        </div>
+        <div class=" col-md-3">
+            <input type="submit" value="Tìm kiếm" class="btn btn-success" />
+        </div>
+    </div>
+}
+    <div class="col-lg-12 form-group">
+        <table class="table">
+            <tr>
+                <th>STT</th>
+                <th>Mã tài khoản</th>
+                <th>Tên tài khoản</th>
+                <th>Mật khẩu</th>
+                <th>Trạng thái</th>
+                <th>Thao tác</th>
+                <th></th>
+            </tr>
+            @{ var i = 1;}
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @i
+                    </td>
+                    <td>
+                        @item.UserID
+                    </td>
+                    <td>
+                        @item.UserName
+                    </td>
+                    <td>
+                        @item.Password
+                    </td>
+                    <td>
+                        @item.Status
+                    </td>
+                    <td>@Html.ActionLink("Xoá", "Delete", new { id = item.UserID })</td>
+                </tr>
+                i++;
+            }
+
+        </table>
+        @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page, @searchString = ViewBag.SearchString }))
+    </div>

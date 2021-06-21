@@ -1,0 +1,81 @@
+﻿@model ModelEF.Model.Product
+
+@{
+    ViewBag.Title = "Tạo mới sản phẩm";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section Header{
+    <i class="fa fa-save"></i>&nbsp;Tạo mới sản phẩm
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <div class="col-lg-12 form-group">
+            <div class="col-md-6">
+                @Html.ActionLink("Quay lại", "Index", "Product", new { @class = "btn btn-primary" })
+            </div>
+        </div>
+        <div class="col-lg-12 form-group">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.ProductID, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ProductID,new { htmlAttributes = new { @class = "form-control", @placeholder = "Mời nhập mã sản phẩm" } })
+                    @Html.ValidationMessageFor(model => model.ProductID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+              <div class="form-group">
+                @Html.LabelFor(model => model.ProductName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ProductName,new { htmlAttributes =new { @class = "form-control", @placeholder = "Nhập tên sản phẩm" } })
+                    @Html.ValidationMessageFor(model => model.ProductName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.UnitCost, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.UnitCost,new { htmlAttributes = new { @class = "form-control", @placeholder = "Mời nhập đơn giá" } })
+                    @Html.ValidationMessageFor(model => model.UnitCost, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Quantity, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mời nhập số lượng" } })
+                    @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                >
+                @Html.LabelFor(model => model.CategoryID, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.ValidationMessageFor(model => model.CategoryID, null, new { @class = "text-dark" })
+                    @Html.DropDownListFor(model => model.CategoryID, (IEnumerable<SelectListItem>)ViewBag.type, "Chọn Loại sản phẩm", new { @class = "form-control", @required = "" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mời nhập mô tả " } })
+                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Status, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mời nhập trạng thái " } })
+                    @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Tạo mới" class="btn btn-danger" />
+                </div>
+            </div>
+        </div>
+    </div>
+        }
